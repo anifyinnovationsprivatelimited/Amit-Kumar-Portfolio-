@@ -182,11 +182,32 @@ const hallLeaderDetails: HallLeader[] = [
   { name: "Amitabh Kant", role: "Policy & Transformation Catalyst" },
 ];
 
+const hallOfExcellenceImages = [
+  "/carousel/1.jpeg",
+  "/carousel/2.jpeg",
+  "/carousel/3.jpeg",
+  "/carousel/5.jpeg",
+  "/carousel/6.jpeg",
+  "/carousel/7.jpeg",
+  "/carousel/8.jpeg",
+  "/carousel/9.jpeg",
+  "/carousel/10.jpeg",
+  "/carousel/11.jpeg",
+  "/carousel/12.jpeg",
+  "/carousel/13.jpeg",
+  "/carousel/14.jpeg",
+  "/carousel/15.jpeg",
+  "/carousel/16.jpeg",
+  "/carousel/17.jpeg",
+  "/carousel/18.jpeg",
+  "/carousel/19.jpeg",
+] as const;
+
 function HallOfExcellence() {
   const images = useMemo(
     () =>
-      Array.from({ length: 19 }, (_, index) => ({
-        src: `/carousel/${index + 1}.jpeg`,
+      hallOfExcellenceImages.map((src, index) => ({
+        src,
         ...hallLeaderDetails[index % hallLeaderDetails.length],
       })),
     [],
@@ -549,7 +570,7 @@ export default function Home() {
               <div className="absolute -right-12 -top-10 h-40 w-40 rounded-full bg-[rgba(58,141,255,0.35)] blur-2xl" />
               <div className="relative h-full min-h-80 overflow-hidden rounded-[1.1rem]">
                 <Image
-                  src="/about.jpeg"
+                  src="/About.jpeg"
                   alt="Dr. Amit Kumar Portrait"
                   fill
                   className="object-cover object-center"
