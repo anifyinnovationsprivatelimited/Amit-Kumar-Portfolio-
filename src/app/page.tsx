@@ -304,14 +304,6 @@ function HallOfExcellence() {
                       className="object-cover"
                       sizes="(max-width: 1024px) 31vw, 30vw"
                     />
-                    <figcaption
-                      className={`absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent p-4 transition-all duration-500 ${
-                        isCenter ? "opacity-100" : "opacity-0"
-                      }`}
-                    >
-                      <p className="text-sm font-semibold text-white">{card.name}</p>
-                      <p className="text-xs uppercase tracking-[0.1em] text-[var(--color-primary)]">{card.role}</p>
-                    </figcaption>
                   </motion.figure>
                 );
               })}
@@ -335,10 +327,6 @@ function HallOfExcellence() {
                   className="object-cover"
                   sizes="92vw"
                 />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/25 to-transparent p-4">
-                  <p className="text-sm font-semibold text-white">{images[centerIndex].name}</p>
-                  <p className="text-xs uppercase tracking-[0.1em] text-[var(--color-primary)]">{images[centerIndex].role}</p>
-                </figcaption>
               </motion.figure>
             </AnimatePresence>
           </div>
