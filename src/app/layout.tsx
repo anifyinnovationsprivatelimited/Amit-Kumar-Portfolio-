@@ -1,6 +1,8 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
+
+const siteUrl = process.env.SITE_URL ?? "https://example.com";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -13,6 +15,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "Dr. Amit Kumar | EV Infrastructure & MSME Consultant",
   description:
     "Official portfolio of Dr. Amit Kumar - purpose-driven entrepreneur, EV infrastructure expert, and MSME Lean & ZED consultant in India.",
@@ -28,6 +31,22 @@ export const metadata: Metadata = {
     description:
       "Leading sustainable mobility, MSME transformation, and innovation-driven infrastructure in India.",
     type: "website",
+    url: siteUrl,
+    images: [
+      {
+        url: "/About.jpeg",
+        width: 1200,
+        height: 630,
+        alt: "Dr. Amit Kumar Portfolio",
+      },
+    ],
+  },
+  alternates: {
+    canonical: siteUrl,
+  },
+  robots: {
+    index: true,
+    follow: true,
   },
 };
 
@@ -42,4 +61,3 @@ export default function RootLayout({
     </html>
   );
 }
-

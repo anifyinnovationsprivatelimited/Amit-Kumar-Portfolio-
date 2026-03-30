@@ -1,36 +1,46 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Amit Portfolio
 
-## Getting Started
+Next.js 16 + Tailwind CSS portfolio for Dr. Amit Kumar. The project is configured for a static export so it can be hosted on GoDaddy (cPanel or plain static hosting) without running a Node.js server.
 
-First, run the development server:
+## Prerequisites
+- Node.js 20.x (LTS) and npm 10+
+- Set the public site URL in .env.local using the provided template:
+  `ash
+  cp .env.example .env.local
+  # edit and set your GoDaddy domain
+  SITE_URL=https://your-domain.com
+  `
 
-```bash
+## Run locally
+`ash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+`
+Visit http://localhost:3000
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Build (static export)
+The site is configured with output: "export" and unoptimized images so it renders to plain HTML/CSS/JS in out/.
+`ash
+npm run build
+`
+The out/ folder is ready to upload to GoDaddy.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Deploy to GoDaddy (cPanel/static hosting)
+1) Build locally: 
+pm run build (ensures out/ is freshly generated).
+2) Zip the contents *inside* out/ (not the folder itself), or upload via FTP/SFTP.
+3) In GoDaddy File Manager, upload the files into public_html (or your chosen subdomain folder). Ensure index.html sits at the root of that directory.
+4) If a previous site exists, back it up first; then replace its files with the new out/ contents.
+5) Clear any GoDaddy caching/CDN if enabled.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Useful scripts
+- 
+pm run dev – local dev server
+- 
+pm run build – production static build to out/
+- 
+pm run lint – lint the project
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Notes
+- Because GoDaddy cannot run Next.js image optimization, images are marked unoptimized and are loaded directly from /public.
+- Robots and sitemap are generated at build time and use SITE_URL; keep that value accurate before each production build.

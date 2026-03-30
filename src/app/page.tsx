@@ -1,7 +1,8 @@
 ﻿"use client";
 
 import Image from "next/image";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import {
   motion,
   AnimatePresence,
@@ -10,7 +11,6 @@ import {
   useTransform,
   useMotionValue,
   useSpring,
-  type PanInfo,
   type Variants,
 } from "framer-motion";
 import {
@@ -26,315 +26,28 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
-
-type TimelineItem = {
-  org: string;
-  role: string;
-  period: string;
-  details: string;
-};
-
-type ProjectItem = {
-  title: string;
-  category: string;
-  description: string;
-  impact: string;
-};
-
-type HallLeader = {
-  name: string;
-  role: string;
-};
-
-const expertise = [
-  "EV Charging Infrastructure",
-  "Lean Manufacturing Consulting",
-  "MSME Productivity Transformation",
-  "Renewable Energy Solutions",
-  "Sustainability Consulting",
-  "Infrastructure Development",
-];
-
-const timeline: TimelineItem[] = [
-  {
-    org: "Sun's Shine India",
-    role: "Founder & Managing Director",
-    period: "2019 - Present",
-    details:
-      "Driving national-scale EV charging and clean infrastructure initiatives with execution-focused project leadership. Leading the development and deployment of sustainable energy and mobility infrastructure across multiple regions. Spearheading strategic partnerships, operational excellence, and innovation to accelerate India&apos;s transition to clean mobility and sustainable industry.",
-  },
-  {
-    org: "Anify Innovations Pvt Ltd",
-    role: "Founder & CMD",
-    period: "2024 - Present",
-    details:
-      "Building next-generation innovation programs connecting MSMEs, sustainability, and technology deployment. Driving integrated solutions across EV charging infrastructure and digital technologies to support future-ready industries. Leading strategic initiatives, operational execution, and partnership development to empower MSMEs and accelerate sustainable growth.",
-  },
-  {
-    org: "Swachh Samaaj Abhiyan",
-    role: "National Secretary",
-    period: "Current",
-    details:
-      "Leading social impact initiatives for environmental awareness, inclusive development, and civic collaboration. Driving community engagement through education, sustainability programs, and grassroots participation. Committed to fostering responsible citizenship and building cleaner, healthier communities for future generations.",
-  },
-  {
-    org: "Nutribarn Processing India Ltd",
-    role: "Director",
-    period: "Prior Leadership",
-    details:
-      "Supported strategy and operational development focused on scalable, quality-driven growth. Contributed to strengthening operational frameworks and improving process efficiency across key functions. Focused on sustainable expansion through innovation, quality assurance, and strong organizational leadership.",
-  },
-  {
-    org: "Surya Kiran Technologies",
-    role: "Manager Projects / Senior Engineer",
-    period: "Early Career",
-    details:
-      "Managed technical delivery in engineering projects and built foundations for later infrastructure leadership. Led project execution, ensuring adherence to quality standards, timelines, and operational efficiency. Gained critical experience in project management, technical problem-solving, and cross-functional collaboration in high-stakes environments.",
-  },
-];
-
-const achievements = [
-  "National Excellence Award",
-  "Honorary Doctorate",
-  "India's Top 10 EV Industry Consultants",
-  "Lean Six Sigma Yellow Belt Certification",
-];
-
-const projects: ProjectItem[] = [
-  {
-    title: "EV Charging Infrastructure Deployment",
-    category: "Electric Mobility",
-    description:
-      "Designed and executed multi-site EV charging deployment models integrating demand analytics and operational planning.",
-    impact: "Accelerated regional EV readiness and improved infrastructure accessibility.",
-  },
-  {
-    title: "MSME Lean Implementation Projects",
-    category: "Government Consulting",
-    description:
-      "Delivered Lean and ZED-aligned transformation programs for MSMEs with measurable productivity improvements.",
-    impact: "Enhanced process efficiency, quality consistency, and cost optimization.",
-  },
-  {
-    title: "Renewable Energy Systems",
-    category: "Sustainability",
-    description:
-      "Implemented clean energy-driven technical solutions for industrial and institutional applications.",
-    impact: "Reduced energy dependency and supported low-carbon operations.",
-  },
-  {
-    title: "Aviation Ground Lighting Projects",
-    category: "Infrastructure",
-    description:
-      "Executed precision-focused engineering projects in critical infrastructure environments.",
-    impact: "Improved operational reliability and safety standards.",
-  },
-];
-
-const insights = [
-  "Future of EV Infrastructure in India",
-  "MSME Digital Transformation",
-  "Clean Energy Economy",
-  "Sustainable Industrial Development",
-];
-
-const testimonials = [
-  {
-    name: "Industry Partner",
-    text: "Dr. Amit Kumar consistently delivers strategic clarity and execution discipline across high-impact infrastructure programs.",
-  },
-  {
-    name: "Government Official",
-    text: "His MSME consulting approach is practical, outcomes-driven, and aligned with national development priorities.",
-  },
-  {
-    name: "MSME Client",
-    text: "The transformation roadmap he guided helped us improve productivity and build a future-ready operating model.",
-  },
-];
-
-const logos = ["IIT Delhi", "Ministry of MSME", "QCI", "Sun's Shine India", "Anify Innovations"];
-
-const stats = [
-  { label: "Years Leadership", value: 7, suffix: "+" },
-  { label: "MSMEs Supported", value: 100, suffix: "+" },
-  { label: "Projects Delivered", value: 50, suffix: "+" },
-  { label: "National Awards", value: 10, suffix: "+" },
-];
-
-const counters = [
-  { label: "Strategic Initiatives", value: 120, suffix: "+" },
-  { label: "Consulting Engagements", value: 200, suffix: "+" },
-  { label: "Impact Districts", value: 40, suffix: "+" },
-];
+import {
+  achievements,
+  counters,
+  expertise,
+  insights,
+  logos,
+  projects,
+  stats,
+  testimonials,
+  timeline,
+  type ProjectItem,
+} from "@/data/content";
 
 const fadeUp: Variants = {
   hidden: { opacity: 0, y: 24 },
   show: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.16, 1, 0.3, 1] } },
 };
 
-const hallLeaderDetails: HallLeader[] = [
-  { name: "Dr. A.P.J. Abdul Kalam", role: "Visionary Scientist & Mentor" },
-  { name: "Ratan Tata", role: "Industrial Leader & Nation Builder" },
-  { name: "Nandan Nilekani", role: "Digital Infrastructure Architect" },
-  { name: "Kiran Mazumdar-Shaw", role: "Innovation-Led Entrepreneur" },
-  { name: "Narayana Murthy", role: "Technology Leadership Pioneer" },
-  { name: "Amitabh Kant", role: "Policy & Transformation Catalyst" },
-];
-
-const hallOfExcellenceImages = [
-  "/carousel/1.jpeg",
-  "/carousel/2.jpeg",
-  "/carousel/3.jpeg",
-  "/carousel/5.jpeg",
-  "/carousel/6.jpeg",
-  "/carousel/7.jpeg",
-  "/carousel/8.jpeg",
-  "/carousel/9.jpeg",
-  "/carousel/10.jpeg",
-  "/carousel/11.jpeg",
-  "/carousel/12.jpeg",
-  "/carousel/13.jpeg",
-  "/carousel/14.jpeg",
-  "/carousel/15.jpeg",
-  "/carousel/16.jpeg",
-  "/carousel/17.jpeg",
-  "/carousel/18.jpeg",
-  "/carousel/19.jpeg",
-] as const;
-
-function HallOfExcellence() {
-  const images = useMemo(
-    () =>
-      hallOfExcellenceImages.map((src, index) => ({
-        src,
-        ...hallLeaderDetails[index % hallLeaderDetails.length],
-      })),
-    [],
-  );
-
-  const [centerIndex, setCenterIndex] = useState(0);
-  const [direction, setDirection] = useState<1 | -1>(1);
-  const [isPaused, setIsPaused] = useState(false);
-
-  const total = images.length;
-  const leftIndex = (centerIndex - 1 + total) % total;
-  const rightIndex = (centerIndex + 1) % total;
-
-  const goNext = useCallback(() => {
-    setDirection(1);
-    setCenterIndex((prev) => (prev + 1) % total);
-  }, [total]);
-
-  const goPrev = useCallback(() => {
-    setDirection(-1);
-    setCenterIndex((prev) => (prev - 1 + total) % total);
-  }, [total]);
-
-  useEffect(() => {
-    if (isPaused) return;
-    const id = setInterval(goNext, 2000);
-    return () => clearInterval(id);
-  }, [goNext, isPaused]);
-
-  const onDragEnd = (_: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
-    if (info.offset.x <= -60) {
-      goNext();
-      return;
-    }
-
-    if (info.offset.x >= 60) {
-      goPrev();
-    }
-  };
-
-  return (
-    <section className="mx-auto w-[min(1120px,92%)] py-14">
-      <div className="mx-auto max-w-3xl text-center">
-        <h2 className="section-title">Hall of Excellence</h2>
-        <p className="section-copy mt-4 text-base md:text-lg">
-          A tribute to the visionaries, innovators, and leaders who inspire progress and shape the future of technology and infrastructure.
-        </p>
-      </div>
-
-      <motion.div
-        className="glass-card mx-auto mt-10 h-[22rem] w-full max-w-[920px] overflow-hidden p-2 sm:h-[24rem]"
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={() => setIsPaused(false)}
-        onTouchStart={() => setIsPaused(true)}
-        onTouchEnd={() => setIsPaused(false)}
-        drag="x"
-        dragConstraints={{ left: 0, right: 0 }}
-        dragElastic={0.08}
-        onDragEnd={onDragEnd}
-      >
-        <div className="relative h-full w-full">
-          <div className="absolute inset-0 hidden sm:block">
-            <AnimatePresence initial={false} mode="popLayout">
-              {[leftIndex, centerIndex, rightIndex].map((imageIndex, slotIndex) => {
-                const card = images[imageIndex];
-                const slot = (["left", "center", "right"] as const)[slotIndex];
-                const isCenter = slot === "center";
-
-                const initialX = slot === "center" ? (direction === 1 ? "28%" : "-28%") : slot === "left" ? "-38%" : "38%";
-                const animateX = slot === "center" ? "0%" : slot === "left" ? "-31%" : "31%";
-                const exitX = slot === "center" ? (direction === 1 ? "-28%" : "28%") : slot === "left" ? "-42%" : "42%";
-
-                return (
-                  <motion.figure
-                    key={`${card.src}-${imageIndex}`}
-                    initial={{ x: initialX, opacity: 0, scale: 0.92 }}
-                    animate={{
-                      x: animateX,
-                      scale: isCenter ? 1.1 : 0.9,
-                      opacity: isCenter ? 1 : 0.6,
-                      filter: isCenter ? "brightness(1)" : "brightness(0.75)",
-                      zIndex: isCenter ? 10 : 5,
-                    }}
-                    exit={{ x: exitX, opacity: 0, scale: 0.9 }}
-                    transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                    className={`group absolute left-1/2 top-1/2 h-[84%] w-[31%] min-w-[220px] -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl border border-white/20 bg-[rgba(15,23,42,0.55)] object-cover shadow-[0_18px_38px_rgba(2,6,23,0.45)] transition-all duration-500 ${
-                      isCenter ? "hover:scale-[1.12] hover:shadow-[0_24px_48px_rgba(2,6,23,0.55)]" : ""
-                    }`}
-                  >
-                    <Image
-                      src={card.src}
-                      alt={card.name}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 31vw, 30vw"
-                    />
-                  </motion.figure>
-                );
-              })}
-            </AnimatePresence>
-          </div>
-
-          <div className="absolute inset-0 sm:hidden">
-            <AnimatePresence initial={false} mode="wait">
-              <motion.figure
-                key={`${images[centerIndex].src}-${centerIndex}`}
-                initial={{ x: direction === 1 ? 40 : -40, opacity: 0, scale: 0.95 }}
-                animate={{ x: 0, opacity: 1, scale: 1 }}
-                exit={{ x: direction === 1 ? -40 : 40, opacity: 0, scale: 0.95 }}
-                transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-                className="absolute inset-5 overflow-hidden rounded-2xl border border-white/20 bg-[rgba(15,23,42,0.55)] shadow-[0_18px_38px_rgba(2,6,23,0.45)]"
-              >
-                <Image
-                  src={images[centerIndex].src}
-                  alt={images[centerIndex].name}
-                  fill
-                  className="object-cover"
-                  sizes="92vw"
-                />
-              </motion.figure>
-            </AnimatePresence>
-          </div>
-        </div>
-      </motion.div>
-    </section>
-  );
-}
+const HallOfExcellence = dynamic(
+  () => import("@/components/HallOfExcellence").then((mod) => mod.HallOfExcellence),
+  { ssr: false },
+);
 
 function AnimatedCounter({ end, label, suffix = "" }: { end: number; label: string; suffix?: string }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -534,7 +247,7 @@ export default function Home() {
                   src="/carousel/12.jpeg"
                   alt="Dr. Amit Kumar"
                   fill
-                  className="object-cover object-center transition-opacity duration-500 group-hover:opacity-0"
+                  className="object-cover object-center transition-opacity duration-500 group-hover:opacity-0 -rotate-90"
                   sizes="(max-width: 768px) 92vw, 420px"
                   priority
                 />
@@ -556,15 +269,15 @@ export default function Home() {
               <div className="absolute -inset-8 -z-10 rounded-[2rem] bg-[radial-gradient(circle_at_40%_40%,rgba(0,255,157,0.24),rgba(58,141,255,0.14),transparent_72%)] blur-2xl" />
               <div className="glass-card relative min-h-80 overflow-hidden p-0">
               <div className="absolute -right-12 -top-10 h-40 w-40 rounded-full bg-[rgba(58,141,255,0.35)] blur-2xl" />
-              <div className="relative h-full min-h-80 overflow-hidden rounded-[1.1rem]">
-                <Image
-                  src="/About.jpeg"
-                  alt="Dr. Amit Kumar Portrait"
-                  fill
-                  className="object-cover object-center"
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                />
-              </div>
+                <div className="relative h-full min-h-80 overflow-hidden rounded-[1.1rem]">
+                  <Image
+                    src="/About.jpeg"
+                    alt="Dr. Amit Kumar Portrait"
+                    fill
+                    className="object-cover object-center"
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                  />
+                </div>
             </div>
             </div>
             <div>
@@ -799,15 +512,29 @@ export default function Home() {
               <div className="mt-7 grid gap-3 text-slate-200">
                 <div className="glass-card flex items-start gap-3 p-4">
                   <Phone className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
-                  <p className="text-sm leading-6 md:text-base">+91 9205349739</p>
+                  <a href="tel:+919205349739" className="text-sm leading-6 transition hover:text-[var(--color-primary)] md:text-base">
+                    +91 9205349739
+                  </a>
                 </div>
                 <div className="glass-card flex items-start gap-3 p-4">
                   <Mail className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
-                  <p className="break-all text-sm leading-6 md:text-base">dr.mit2022@gmail.com</p>
+                  <a
+                    href="mailto:dr.mit2022@gmail.com"
+                    className="break-all text-sm leading-6 transition hover:text-[var(--color-primary)] md:text-base"
+                  >
+                    dr.mit2022@gmail.com
+                  </a>
                 </div>
                 <div className="glass-card flex items-start gap-3 p-4">
                   <Linkedin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
-                  <p className="break-all text-sm leading-6 md:text-base">linkedin.com/in/dr-amit-kumar</p>
+                  <a
+                    href="https://www.linkedin.com/in/dr-amit-kumar"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="break-all text-sm leading-6 transition hover:text-[var(--color-primary)] md:text-base"
+                  >
+                    linkedin.com/in/dr-amit-kumar
+                  </a>
                 </div>
                 <div className="glass-card flex items-start gap-3 p-4">
                   <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[var(--color-primary)]" />
