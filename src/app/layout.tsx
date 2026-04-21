@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { siteUrl } from "@/lib/site-url";
 import "./globals.css";
-
-const siteUrl = process.env.SITE_URL ?? "https://example.com";
 
 const inter = Inter({
   variable: "--font-inter",

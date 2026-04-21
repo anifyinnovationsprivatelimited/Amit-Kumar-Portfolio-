@@ -1,46 +1,83 @@
 # Amit Portfolio
 
-Next.js 16 + Tailwind CSS portfolio for Dr. Amit Kumar. The project is configured for a static export so it can be hosted on GoDaddy (cPanel or plain static hosting) without running a Node.js server.
+Next.js 16 + Tailwind CSS portfolio for Dr. Amit Kumar.
+
+The project is configured with `output: "export"` in `next.config.ts`, so `npm run build` generates a static site in `out/`. This works for static hosting and is also safe to deploy on Vercel because the current app routes are fully static.
 
 ## Prerequisites
-- Node.js 20.x (LTS) and npm 10+
-- Set the public site URL in .env.local using the provided template:
-  `ash
-  cp .env.example .env.local
-  # edit and set your GoDaddy domain
-  SITE_URL=https://your-domain.com
-  `
 
-## Run locally
-`ash
+- Node.js 20.x or newer
+- npm 10 or newer
+- A production URL for metadata, robots, and sitemap generation
+
+Create a local environment file from the example:
+
+```bash
+cp .env.example .env.local
+```
+
+Then set:
+
+```bash
+SITE_URL=https://your-domain.com
+```
+
+## Run Locally
+
+```bash
 npm install
 npm run dev
-`
-Visit http://localhost:3000
+```
 
-## Build (static export)
-The site is configured with output: "export" and unoptimized images so it renders to plain HTML/CSS/JS in out/.
-`ash
+Visit `http://localhost:3000`.
+
+## Build
+
+```bash
 npm run build
-`
-The out/ folder is ready to upload to GoDaddy.
+```
 
-## Deploy to GoDaddy (cPanel/static hosting)
-1) Build locally: 
-pm run build (ensures out/ is freshly generated).
-2) Zip the contents *inside* out/ (not the folder itself), or upload via FTP/SFTP.
-3) In GoDaddy File Manager, upload the files into public_html (or your chosen subdomain folder). Ensure index.html sits at the root of that directory.
-4) If a previous site exists, back it up first; then replace its files with the new out/ contents.
-5) Clear any GoDaddy caching/CDN if enabled.
+The static output is generated in `out/`.
 
-## Useful scripts
-- 
-pm run dev – local dev server
-- 
-pm run build – production static build to out/
-- 
-pm run lint – lint the project
+## Deploy To Vercel
 
-## Notes
-- Because GoDaddy cannot run Next.js image optimization, images are marked unoptimized and are loaded directly from /public.
-- Robots and sitemap are generated at build time and use SITE_URL; keep that value accurate before each production build.
+This repo includes `vercel.json` with:
+
+- `installCommand`: `npm ci`
+- `buildCommand`: `npm run build`
+- `framework`: `nextjs`
+
+Recommended Vercel settings:
+
+- Framework Preset: `Next.js`
+- Install Command: `npm ci`
+- Build Command: `npm run build`
+- Environment Variable: `SITE_URL=https://your-production-domain.com`
+
+If you deploy before the custom domain is connected, Vercel's deployment URL is used as a fallback for metadata, sitemap, and robots.
+
+## Deployment Checks
+
+Run these before deploying:
+
+```bash
+cmd /c npm run lint
+cmd /c npm run build
+```
+
+Known local issue on Windows:
+
+- Running `npm run ...` directly in PowerShell may fail if script execution is disabled. Use `cmd /c npm run build` or update the PowerShell execution policy.
+
+Known deployment considerations:
+
+- Keep `SITE_URL` accurate in Vercel once the final domain is connected.
+- Do not commit `.env.local`; Vercel environment variables should be configured in the Vercel dashboard.
+- Because the project uses static export, avoid adding server-only features unless you remove `output: "export"` first.
+- Images are set to `unoptimized: true`, which is required for static export compatibility.
+
+## Useful Scripts
+
+- `npm run dev`: local development server
+- `npm run build`: production static build
+- `npm run lint`: lint the project
