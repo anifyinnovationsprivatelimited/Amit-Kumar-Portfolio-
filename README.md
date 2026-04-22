@@ -44,14 +44,17 @@ The static output is generated in `out/`.
 This repo includes `vercel.json` with:
 
 - `installCommand`: `npm ci`
-- `buildCommand`: `npm run build`
+- `buildCommand`: `npm run vercel-build`
 - `framework`: `nextjs`
+- `outputDirectory`: `out`
+
+The Vercel build command runs [`scripts/vercel-build.mjs`](scripts/vercel-build.mjs), which performs the production Next.js build and fails the deployment if the build fails.
 
 Recommended Vercel settings:
 
 - Framework Preset: `Next.js`
 - Install Command: `npm ci`
-- Build Command: `npm run build`
+- Build Command: `npm run vercel-build`
 - Environment Variable: `SITE_URL=https://your-production-domain.com`
 
 If you deploy before the custom domain is connected, Vercel's deployment URL is used as a fallback for metadata, sitemap, and robots.
@@ -62,7 +65,7 @@ Run these before deploying:
 
 ```bash
 cmd /c npm run lint
-cmd /c npm run build
+cmd /c npm run vercel-build
 ```
 
 Known local issue on Windows:
@@ -80,4 +83,5 @@ Known deployment considerations:
 
 - `npm run dev`: local development server
 - `npm run build`: production static build
+- `npm run vercel-build`: Vercel deployment build
 - `npm run lint`: lint the project
