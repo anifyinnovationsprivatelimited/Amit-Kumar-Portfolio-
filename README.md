@@ -1,8 +1,8 @@
-# Amit Portfolio
+﻿# Amit Portfolio
 
 Next.js 16 + Tailwind CSS portfolio for Dr. Amit Kumar.
 
-The project is configured with `output: "export"` in `next.config.ts`, so `npm run build` generates a static site in `out/`. This works for static hosting and is also safe to deploy on Vercel because the current app routes are fully static.
+The project deploys on Vercel using the standard Next.js build output in `.next`. It does not use static export, `next export`, a custom `distDir`, or an `out` output directory.
 
 ## Prerequisites
 
@@ -37,26 +37,25 @@ Visit `http://localhost:3000`.
 npm run build
 ```
 
-The static output is generated in `out/`.
+The Next.js production output is generated in `.next/`.
 
 ## Deploy To Vercel
 
 This repo includes `vercel.json` with:
 
-- `installCommand`: `npm ci`
-- `buildCommand`: `npm run vercel-build`
 - `framework`: `nextjs`
-
-The Vercel build command runs [`scripts/vercel-build.mjs`](scripts/vercel-build.mjs), which performs the production Next.js build and fails the deployment if the build fails.
+- `installCommand`: `npm ci`
+- `buildCommand`: `npm run build`
 
 Recommended Vercel settings:
 
 - Framework Preset: `Next.js`
 - Install Command: `npm ci`
-- Build Command: `npm run vercel-build`
+- Build Command: `npm run build`
+- Output Directory: leave empty / default, or `.next` if the dashboard requires a value
 - Environment Variable: `SITE_URL=https://your-production-domain.com`
 
-If you deploy before the custom domain is connected, Vercel's deployment URL is used as a fallback for metadata, sitemap, and robots.
+Do not set Vercel's Output Directory to `out`. Vercel's Next.js builder needs `.next/routes-manifest.json`.
 
 ## Deployment Checks
 
@@ -64,7 +63,7 @@ Run these before deploying:
 
 ```bash
 cmd /c npm run lint
-cmd /c npm run vercel-build
+cmd /c npm run build
 ```
 
 Known local issue on Windows:
@@ -75,13 +74,11 @@ Known deployment considerations:
 
 - Keep `SITE_URL` accurate in Vercel once the final domain is connected.
 - Do not commit `.env.local`; Vercel environment variables should be configured in the Vercel dashboard.
-- Because the project uses static export, avoid adding server-only features unless you remove `output: "export"` first.
-- Images are set to `unoptimized: true`, which is required for static export compatibility.
-- Do not set Vercel's Output Directory to `out`; Vercel's Next.js builder needs the default `.next` build directory.
+- This project uses App Router from `src/app`.
+- This project does not use Turborepo, so no `turbo.json` output config is needed.
 
 ## Useful Scripts
 
 - `npm run dev`: local development server
-- `npm run build`: production static build
-- `npm run vercel-build`: Vercel deployment build
+- `npm run build`: production Next.js build
 - `npm run lint`: lint the project
