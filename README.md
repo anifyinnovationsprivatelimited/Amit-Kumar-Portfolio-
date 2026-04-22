@@ -46,7 +46,6 @@ This repo includes `vercel.json` with:
 - `installCommand`: `npm ci`
 - `buildCommand`: `npm run vercel-build`
 - `framework`: `nextjs`
-- `outputDirectory`: `out`
 
 The Vercel build command runs [`scripts/vercel-build.mjs`](scripts/vercel-build.mjs), which performs the production Next.js build and fails the deployment if the build fails.
 
@@ -78,6 +77,7 @@ Known deployment considerations:
 - Do not commit `.env.local`; Vercel environment variables should be configured in the Vercel dashboard.
 - Because the project uses static export, avoid adding server-only features unless you remove `output: "export"` first.
 - Images are set to `unoptimized: true`, which is required for static export compatibility.
+- Do not set Vercel's Output Directory to `out`; Vercel's Next.js builder needs the default `.next` build directory.
 
 ## Useful Scripts
 
