@@ -26,14 +26,16 @@ export const expertise = [
   "Infrastructure Development",
 ];
 
+
 export const timeline: TimelineItem[] = [
   {
     org: "Sun's Shine India",
     role: "Founder & Managing Director",
-    period: "2019 - Present",
+    period: "2018 - Present",
     details:
       "Driving national-scale EV charging and clean infrastructure initiatives with execution-focused project leadership. Leading the development and deployment of sustainable energy and mobility infrastructure across multiple regions. Spearheading strategic partnerships, operational excellence, and innovation to accelerate India's transition to clean mobility and sustainable industry.",
   },
+
   {
     org: "Anify Innovations Pvt Ltd",
     role: "Founder & CMD",
@@ -41,6 +43,23 @@ export const timeline: TimelineItem[] = [
     details:
       "Building next-generation innovation programs connecting MSMEs, sustainability, and technology deployment. Driving integrated solutions across EV charging infrastructure and digital technologies to support future-ready industries. Leading strategic initiatives, operational execution, and partnership development to empower MSMEs and accelerate sustainable growth.",
   },
+
+  {
+    org: "Ministry of MSME (QCI)",
+    role: "Certified ZED & LEAN Consultant",
+    period: "2020 - Present",
+    details:
+      "Helping MSMEs improve competitiveness through quality excellence, productivity enhancement, waste reduction, and operational transformation. Supporting enterprises in achieving ZED Certification and adopting Lean manufacturing practices for sustainable growth.",
+  },
+
+  {
+    org: "IIT Delhi",
+    role: "EV Technology Expert",
+    period: "2021 - Present",
+    details:
+      "Contributing to the advancement of EV technology and sustainable mobility solutions. Supporting EV charging infrastructure planning, implementation strategies, and green mobility initiatives across India.",
+  },
+
   {
     org: "Swachh Samaaj Abhiyan",
     role: "National Secretary",
@@ -48,6 +67,23 @@ export const timeline: TimelineItem[] = [
     details:
       "Leading social impact initiatives for environmental awareness, inclusive development, and civic collaboration. Driving community engagement through education, sustainability programs, and grassroots participation. Committed to fostering responsible citizenship and building cleaner, healthier communities for future generations.",
   },
+
+  {
+    org: "National Excellence Award",
+    role: "Award Recipient",
+    period: "2023",
+    details:
+      "Recognized for outstanding contributions to industrial development, sustainability initiatives, EV infrastructure advancement, and MSME transformation across India.",
+  },
+
+  {
+    org: "India Manufacturing Review",
+    role: "Top 10 EV Consultant Organization Recognition",
+    period: "December 2025",
+    details:
+      "SUN'S SHINE INDIA was recognized among India's Top 10 EV Consultant Organizations for excellence in EV consulting, project planning, charging infrastructure development, and policy advisory services.",
+  },
+
   {
     org: "Nutribarn Processing India Ltd",
     role: "Director",
@@ -55,6 +91,7 @@ export const timeline: TimelineItem[] = [
     details:
       "Supported strategy and operational development focused on scalable, quality-driven growth. Contributed to strengthening operational frameworks and improving process efficiency across key functions. Focused on sustainable expansion through innovation, quality assurance, and strong organizational leadership.",
   },
+
   {
     org: "Surya Kiran Technologies",
     role: "Manager Projects / Senior Engineer",
@@ -64,11 +101,33 @@ export const timeline: TimelineItem[] = [
   },
 ];
 
+
+
 export const achievements = [
-  "National Excellence Award",
-  "Honorary Doctorate",
-  "India's Top 10 EV Industry Consultants",
-  "Lean Six Sigma Yellow Belt Certification",
+  {
+    title: "National Excellence Award 2023",
+    category: "National Recognition",
+    description:
+      "Recognized for contributions to industrial excellence, sustainability, and innovation."
+  },
+  {
+    title: "Top 10 EV Consultant Organization",
+    category: "India Manufacturing Review 2025",
+    description:
+      "SUN'S SHINE INDIA recognized among India's leading EV consulting organizations."
+  },
+  {
+    title: "QCI Certified ZED & LEAN Consultant",
+    category: "Ministry of MSME",
+    description:
+      "Supporting MSMEs through operational excellence and quality transformation."
+  },
+  {
+    title: "EV Technology Expert",
+    category: "IIT Delhi",
+    description:
+      "Contributing to sustainable mobility and EV infrastructure development."
+  }
 ];
 
 export const projects: ProjectItem[] = [
@@ -109,6 +168,33 @@ export const insights = [
   "Sustainable Industrial Development",
 ];
 
+export const leadershipPillars = [
+  {
+    number: "01",
+    title: "Sustainable Growth",
+    description:
+      "Building organizations that balance economic success with environmental responsibility."
+  },
+  {
+    number: "02",
+    title: "Innovation Leadership",
+    description:
+      "Driving meaningful transformation through technology, strategic thinking, and execution."
+  },
+  {
+    number: "03",
+    title: "Infrastructure Excellence",
+    description:
+      "Creating long-term value through quality-driven infrastructure and industrial development."
+  },
+  {
+    number: "04",
+    title: "Social Impact",
+    description:
+      "Promoting community development and responsible leadership for future generations."
+  }
+];
+
 export const testimonials = [
   {
     name: "Industry Partner",
@@ -139,32 +225,29 @@ export const counters = [
   { label: "Impact Districts", value: 40, suffix: "+" },
 ];
 
-export const hallLeaderDetails: HallLeader[] = [
-  { name: "Dr. A.P.J. Abdul Kalam", role: "Visionary Scientist & Mentor" },
-  { name: "Ratan Tata", role: "Industrial Leader & Nation Builder" },
-  { name: "Nandan Nilekani", role: "Digital Infrastructure Architect" },
-  { name: "Kiran Mazumdar-Shaw", role: "Innovation-Led Entrepreneur" },
-  { name: "Narayana Murthy", role: "Technology Leadership Pioneer" },
-  { name: "Amitabh Kant", role: "Policy & Transformation Catalyst" },
-];
+export type HallLeaderProfile = {
+  name: string;
+  role: string;
+  image: string;
+};
 
-export const hallOfExcellenceImages = [
-  "/carousel/1.jpeg",
-  "/carousel/2.jpeg",
-  "/carousel/3.jpeg",
-  "/carousel/5.jpeg",
-  "/carousel/6.jpeg",
-  "/carousel/7.jpeg",
-  "/carousel/8.jpeg",
-  "/carousel/9.jpeg",
-  "/carousel/10.jpeg",
-  "/carousel/11.jpeg",
-  "/carousel/12.jpeg",
-  "/carousel/13.jpeg",
-  "/carousel/14.jpeg",
-  "/carousel/15.jpeg",
-  "/carousel/16.jpeg",
-  "/carousel/17.jpeg",
-  "/carousel/18.jpeg",
-  "/carousel/19.jpeg",
-] as const;
+export const hallLeaderProfiles: HallLeaderProfile[] = [
+  { name: "Dr. A.P.J. Abdul Kalam", role: "Visionary Scientist & Mentor", image: "/carousel/1.jpeg" },
+  { name: "Ratan Tata", role: "Industrial Leader & Nation Builder", image: "/carousel/2.jpeg" },
+  { name: "Nandan Nilekani", role: "Digital Infrastructure Architect", image: "/carousel/3.jpeg" },
+  { name: "Kiran Mazumdar-Shaw", role: "Innovation-Led Entrepreneur", image: "/carousel/5.jpeg" },
+  { name: "Narayana Murthy", role: "Technology Leadership Pioneer", image: "/carousel/6.jpeg" },
+  { name: "Amitabh Kant", role: "Policy & Transformation Catalyst", image: "/carousel/7.jpeg" },
+  { name: "Dr. A.P.J. Abdul Kalam", role: "Visionary Scientist & Mentor", image: "/carousel/8.jpeg" },
+  { name: "Ratan Tata", role: "Industrial Leader & Nation Builder", image: "/carousel/9.jpeg" },
+  { name: "Nandan Nilekani", role: "Digital Infrastructure Architect", image: "/carousel/10.jpeg" },
+  { name: "Kiran Mazumdar-Shaw", role: "Innovation-Led Entrepreneur", image: "/carousel/11.jpeg" },
+  { name: "Narayana Murthy", role: "Technology Leadership Pioneer", image: "/carousel/12.jpeg" },
+  { name: "Amitabh Kant", role: "Policy & Transformation Catalyst", image: "/carousel/13.jpeg" },
+  { name: "Dr. A.P.J. Abdul Kalam", role: "Visionary Scientist & Mentor", image: "/carousel/14.jpeg" },
+  { name: "Ratan Tata", role: "Industrial Leader & Nation Builder", image: "/carousel/15.jpeg" },
+  { name: "Nandan Nilekani", role: "Digital Infrastructure Architect", image: "/carousel/16.jpeg" },
+  { name: "Kiran Mazumdar-Shaw", role: "Innovation-Led Entrepreneur", image: "/carousel/17.jpeg" },
+  { name: "Narayana Murthy", role: "Technology Leadership Pioneer", image: "/carousel/18.jpeg" },
+  { name: "Amitabh Kant", role: "Policy & Transformation Catalyst", image: "/carousel/19.jpeg" },
+];

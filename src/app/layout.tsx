@@ -29,7 +29,10 @@ export const metadata: Metadata = {
     title: "Dr. Amit Kumar | EV Infrastructure & MSME Consultant",
     description:
       "Leading sustainable mobility, MSME transformation, and innovation-driven infrastructure in India.",
-    type: "website",
+    type: "profile",
+    firstName: "Amit",
+    lastName: "Kumar",
+    username: "dr-amit-kumar",
     url: siteUrl,
     images: [
       {
@@ -54,9 +57,42 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Dr. Amit Kumar",
+    "jobTitle": "EV Infrastructure & MSME Consultant",
+    "alumniOf": {
+      "@type": "EducationalOrganization",
+      "name": "Indian Institute of Technology Delhi"
+    },
+    "worksFor": [
+      {
+        "@type": "Organization",
+        "name": "Sun's Shine India",
+        "role": "Founder & Managing Director"
+      },
+      {
+        "@type": "Organization",
+        "name": "Anify Innovations Pvt Ltd",
+        "role": "Founder & CMD"
+      }
+    ],
+    "url": siteUrl,
+    "sameAs": [
+      "https://www.linkedin.com/in/dr-amit-kumar"
+    ]
+  };
+
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>{children}</body>
+      <body className={`${inter.variable} ${spaceGrotesk.variable} antialiased`}>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

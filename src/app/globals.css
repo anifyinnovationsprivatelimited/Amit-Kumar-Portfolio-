@@ -1,12 +1,29 @@
-﻿@import "tailwindcss";
+@import "tailwindcss";
 
 :root {
-  --color-primary: #00ff9d;
-  --color-accent: #3a8dff;
-  --color-bg: #0b0f1a;
-  --color-bg-soft: #111827;
+  /* Core Color System (Slate basis) */
+  --color-bg: #07090e;
+  --color-bg-soft: #0f131a;
+  --color-bg-tertiary: #161c26;
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-tertiary: #64748b;
+
+  /* Brand Glow Accents */
+  --color-primary: #00ff9d;       /* EV Green */
+  --color-accent: #5f9eff;        /* High Contrast Blue */
+  --color-accent-rgb: 95, 158, 255;
+
+  /* Typography */
   --font-space: var(--font-space-grotesk), "Space Grotesk", "Inter", sans-serif;
-  --font-body: var(--font-inter), "Inter", "Poppins", sans-serif;
+  --font-body: var(--font-inter), "Inter", sans-serif;
+
+  /* Borders & Elevation */
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --shadow-md: 0 12px 24px rgba(0, 0, 0, 0.6);
 }
 
 * {
@@ -249,6 +266,11 @@ footer {
   .hero-orb {
     height: 340px;
   }
+}
+
+*:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
 }
 
 
