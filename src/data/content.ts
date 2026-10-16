@@ -5,7 +5,10 @@ export type TimelineItem = {
   details: string;
 };
 
+export type ProjectSlug = "zed" | "lean" | "ev" | "aviation";
+
 export type ProjectItem = {
+  slug: ProjectSlug;
   title: string;
   category: string;
   description: string;
@@ -83,15 +86,6 @@ export const timeline: TimelineItem[] = [
     details:
       "SUN'S SHINE INDIA was recognized among India's Top 10 EV Consultant Organizations for excellence in EV consulting, project planning, charging infrastructure development, and policy advisory services.",
   },
-
-  {
-    org: "Nutribarn Processing India Ltd",
-    role: "Director",
-    period: "Prior Leadership",
-    details:
-      "Supported strategy and operational development focused on scalable, quality-driven growth. Contributed to strengthening operational frameworks and improving process efficiency across key functions. Focused on sustainable expansion through innovation, quality assurance, and strong organizational leadership.",
-  },
-
   {
     org: "Surya Kiran Technologies",
     role: "Manager Projects / Senior Engineer",
@@ -132,32 +126,50 @@ export const achievements = [
 
 export const projects: ProjectItem[] = [
   {
-    title: "EV Charging Infrastructure Deployment",
-    category: "Electric Mobility",
+    slug: "zed",
+    title: "Manufacturing Excellence & Business Transformation",
+    category: "Industrial Consultant",
     description:
-      "Designed and executed multi-site EV charging deployment models integrating demand analytics and operational planning.",
-    impact: "Accelerated regional EV readiness and improved infrastructure accessibility.",
+      "Helping manufacturing enterprises achieve world-class performance through structured business transformation.",
+    impact:
+      "Partnered with industries to strengthen operational excellence by improving quality, productivity, cost efficiency, delivery performance, workplace safety, lean operations, sustainability, and continuous improvement, enabling organizations to build resilient, competitive, and future-ready manufacturing ecosystems.",
+  },
+
+  {
+    slug: "zed",
+    title: "MSME Sustainable (ZED) Scheme",
+    category: "Government Consultant",
+    description:
+      "Guiding MSMEs towards operational excellence, quality improvement, and sustainable growth.",
+    impact:
+      "MSME ZED (Zero Defect Zero Effect) is an initiative by the Ministry of Micro, Small and Medium Enterprises, Government of India. It helps MSMEs improve product quality, reduce waste, adopt eco-friendly manufacturing practices, enhance operational efficiency, and achieve sustainable business growth through the ZED Certification Scheme.",
   },
   {
-    title: "MSME Lean Implementation Projects",
-    category: "Government Consulting",
+    slug: "lean",
+    title: "MSME Competitive (LEAN) Scheme",
+    category: "Government Consultant",
     description:
-      "Delivered Lean and ZED-aligned transformation programs for MSMEs with measurable productivity improvements.",
-    impact: "Enhanced process efficiency, quality consistency, and cost optimization.",
+      "Implementing Lean Manufacturing practices under the Ministry of MSME's Competitive (LEAN) Scheme.",
+    impact:
+      "Supported MSMEs in improving productivity, reducing operational waste, minimizing defects and rework, optimizing resource utilization, streamlining manufacturing processes, lowering production costs, improving delivery timelines, enhancing product quality through standardized practices, increasing customer satisfaction, and strengthening long-term competitiveness in domestic and global markets.",
   },
   {
-    title: "Renewable Energy Systems",
-    category: "Sustainability",
+    slug: "ev",
+    title: "EV Infrastructure ",
+    category: "Electric Vehicle Infrastructure",
     description:
-      "Implemented clean energy-driven technical solutions for industrial and institutional applications.",
-    impact: "Reduced energy dependency and supported low-carbon operations.",
+      "Leading end-to-end EPC projects for EV charging infrastructure and sustainable energy solutions.",
+    impact:
+      "Successfully led the execution of turnkey EPC projects covering engineering, procurement, construction, commissioning, renewable energy integration, and smart EV charging technologies. Under Dr. Amit Kumar's leadership, SUN'S SHINE INDIA was recognized as one of India's Top 10 EV Consultants by the Indian Manufacturing Review (2025), demonstrating excellence in delivering innovative, reliable, and future-ready electric mobility infrastructure across India.",
   },
   {
-    title: "Aviation Ground Lighting Projects",
-    category: "Infrastructure",
+    slug: "aviation",
+    title: "Aviation Ground Lighting (AGL) Infrastructure Projects",
+    category: "Airport Infrastructure & Aviation Solutions",
     description:
-      "Executed precision-focused engineering projects in critical infrastructure environments.",
-    impact: "Improved operational reliability and safety standards.",
+      "Delivering end-to-end EPC solutions for Aviation Ground Lighting, from design and installation to commissioning and maintenance.",
+    impact:
+      "Successfully executed Aviation Ground Lighting projects that enhance runway safety, aircraft navigation, and airport operational efficiency. By implementing ICAO and DGCA-compliant lighting systems, advanced LED technology, and precision engineering, these projects improve visibility, reduce maintenance costs, optimize energy efficiency, ensure regulatory compliance, and support safe, reliable, and uninterrupted airfield operations.",
   },
 ];
 
@@ -213,7 +225,7 @@ export const testimonials = [
 export const logos = ["IIT Delhi", "Ministry of MSME", "QCI", "Sun's Shine India", "Anify Innovations"];
 
 export const stats = [
-  { label: "Years Leadership", value: 7, suffix: "+" },
+  { label: "Years Leadership", value: 10, suffix: "+" },
   { label: "MSMEs Supported", value: 100, suffix: "+" },
   { label: "Projects Delivered", value: 50, suffix: "+" },
   { label: "National Awards", value: 10, suffix: "+" },
